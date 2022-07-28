@@ -72,7 +72,7 @@ class Restaurent extends Equatable {
       deliveryFee: 0.4,
       destance: 14,
       menuItems: MenuItem.menuItems
-          .where((menuitem) => menuitem.restaurantId == 4)
+          .where((menuItem) => menuItem.restaurantId == 4)
           .toList(),
     ),
   ];
