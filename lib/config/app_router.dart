@@ -22,6 +22,8 @@ class AppRouter {
         return DeliveryTimeScreen.route();
       case CheckOutScreen.routeName:
         return CheckOutScreen.route();
+      case SplashScreen.routeName:
+        return SplashScreen.route();
     }
     return _errorRoute();
   }
