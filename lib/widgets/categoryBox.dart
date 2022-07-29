@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../models/category_model.dart';
 
 class CategoryBox extends StatelessWidget {
@@ -19,14 +18,14 @@ class CategoryBox extends StatelessWidget {
         children: [
           Positioned(
             top: 10,
-            left: 10,
+            left: 19,
             child: Container(
-              width: 50,
-              height: 60,
+              width: 40,
+              height: 50,
               child: category.image,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.white,
               ),
             ),
           ),
@@ -38,11 +37,11 @@ class CategoryBox extends StatelessWidget {
                 category.name,
                 style: Theme.of(context)
                     .textTheme
-                    .headline5
+                    .headline6
                     ?.copyWith(color: Colors.white),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

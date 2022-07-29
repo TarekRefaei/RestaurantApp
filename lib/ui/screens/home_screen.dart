@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: 3,
                   itemBuilder: (context, index) {
-                    return PromoBox();
+                    return const PromoBox();
                   },
                 ),
               ),

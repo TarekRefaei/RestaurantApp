@@ -7,7 +7,7 @@ class MenuItem extends Equatable {
   final String description;
   final double price;
 
-  MenuItem(
+  const MenuItem(
       {required this.id,
       required this.restaurantId,
       required this.name,
@@ -18,13 +18,13 @@ class MenuItem extends Equatable {
   List<Object?> get props => [id, name, restaurantId, description, price];
 
   static List<MenuItem> menuItems = [
-    MenuItem(
+    const MenuItem(
         id: 1,
         restaurantId: 1,
         name: "Pizza",
         description: "Pizza with tomatoes",
         price: 6.99),
-    MenuItem(
+    const MenuItem(
         id: 2,
         restaurantId: 2,
         name: "Coca Cola",

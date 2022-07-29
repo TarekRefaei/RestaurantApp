@@ -12,7 +12,7 @@ class Restaurant extends Equatable {
   final double deliveryFee;
   final double distance;
 
-  Restaurant(
+  const Restaurant(
       {required this.id,
       required this.name,
       required this.menuItems,

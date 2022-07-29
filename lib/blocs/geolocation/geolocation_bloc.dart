@@ -36,6 +36,7 @@ class GeolocationBloc extends Bloc<GeolocationEvent, GeolocationState> {
     yield GeolocationLoaded(position: event.position);
   }
 
+  @override
   Future<void> close() {
     _geolocationStream?.cancel();
     return super.close();

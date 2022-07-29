@@ -16,27 +16,28 @@ class Category extends Equatable {
       id: 1,
       name: "Fast Food",
       image: Image.asset("assets/logo/burger.png"),
-    ),Category(
-      id: 1,
-      name: "Fast Food",
-      image: Image.asset("assets/logo/burger.png"),
-    ),Category(
+    ),
+    Category(
       id: 2,
       name: "Pizza",
       image: Image.asset("assets/logo/pizza.png"),
-    ),Category(
+    ),
+    Category(
       id: 3,
-      name: "deserts",
+      name: "Deserts",
       image: Image.asset("assets/logo/deserts.png"),
-    ),Category(
+    ),
+    Category(
       id: 4,
       name: "Ice Cream",
       image: Image.asset("assets/logo/ice.png"),
-    ),Category(
+    ),
+    Category(
       id: 5,
-      name: "Vegetarian",
+      name: "Vegetable",
       image: Image.asset("assets/logo/vege.png"),
-    ),Category(
+    ),
+    Category(
       id: 6,
       name: "Cola",
       image: Image.asset("assets/logo/cola.png"),
