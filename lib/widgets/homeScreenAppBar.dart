@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/config/theme.dart';
 
 class CustomAppBarWidget extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBarWidget({
@@ -13,6 +14,7 @@ class CustomAppBarWidget extends StatelessWidget with PreferredSizeWidget {
         onPressed: () {},
       ),
       centerTitle: false,
+      backgroundColor: Theme.of(context).primaryColor,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

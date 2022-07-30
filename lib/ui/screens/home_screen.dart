@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/category_model.dart';
-
-import '../../widgets/categoryBox.dart';
-import '../../widgets/homeScreenAppBar.dart';
+import '../../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,13 +9,15 @@ class HomeScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-        builder: (context) => const HomeScreen(),
-        settings: const RouteSettings(name: routeName));
+      builder: (context) => const HomeScreen(),
+      settings: const RouteSettings(name: routeName),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: const CustomAppBarWidget(),
       body: SingleChildScrollView(
         child: Column(
@@ -31,7 +31,9 @@ class HomeScreen extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: Category.categories.length,
                   itemBuilder: (context, index) {
-                    return CategoryBox(category: Category.categories[index]);
+                    return CategoryBox(
+                      category: Category.categories[index],
+                    );
                   },
                 ),
               ),
@@ -50,18 +52,41 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: SearchBox(
+                      hintText: "What would you like to eat?",
+                      borderColor: Colors.black,
+                      underLineColor: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    width: 50,
+                    height: 50,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.menu,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
     );
-  }
-}
-
-class PromoBox extends StatelessWidget {
-  const PromoBox({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

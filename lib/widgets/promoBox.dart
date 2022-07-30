@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+
+import '../config/const.dart';
+
+class PromoBox extends StatelessWidget {
+  const PromoBox({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(left: 8),
+          width: MediaQuery.of(context).size.width - 40,
+          decoration: BoxDecoration(
+              image: const DecorationImage(
+                image: NetworkImage(promoUrl),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(5.0),
+              color: Theme.of(context).primaryColor),
+        ),
+        //TODO Custom Clipper
+        Container(
+          margin: const EdgeInsets.only(left: 8),
+          width: MediaQuery.of(context).size.width - 40,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: Theme.of(context).primaryColor),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10, left: 10, right: 140),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  promoText,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                Text(
+                  promoDescription,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
