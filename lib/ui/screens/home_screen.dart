@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/models/category_model.dart';
+import 'package:food_delivery_app/models/models.dart';
 import '../../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
       appBar: const CustomAppBarWidget(),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -83,7 +84,30 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Top Rated',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: Restaurant.restaurants.length,
+                itemBuilder: (context, index) {
+                  return RestaurantCard(
+                    restaurant: Restaurant.restaurants[index],
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

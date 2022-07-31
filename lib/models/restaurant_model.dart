@@ -11,16 +11,19 @@ class Restaurant extends Equatable {
   final int deliveryTime;
   final double deliveryFee;
   final double distance;
+  final String imageUrl;
 
-  const Restaurant(
-      {required this.id,
-      required this.name,
-      required this.menuItems,
-      required this.restaurantImage,
-      required this.tags,
-      required this.deliveryTime,
-      required this.deliveryFee,
-      required this.distance});
+  const Restaurant({
+    required this.id,
+    required this.name,
+    required this.menuItems,
+    required this.restaurantImage,
+    required this.tags,
+    required this.deliveryTime,
+    required this.deliveryFee,
+    required this.distance,
+    required this.imageUrl,
+  });
 
   @override
   List<Object?> get props =>
@@ -36,20 +39,24 @@ class Restaurant extends Equatable {
       deliveryFee: 0.2,
       distance: 30,
       menuItems: MenuItem.menuItems
-          .where((menuitem) => menuitem.restaurantId == 1)
+          .where((menuItem) => menuItem.restaurantId == 1)
           .toList(),
+      imageUrl:
+          'https://media-cdn.tripadvisor.com/media/photo-s/06/25/66/66/papa-john-s.jpg',
     ),
     Restaurant(
       id: 2,
-      name: "jhony Rocket",
+      name: "Jhony Rocket",
       restaurantImage: Image.asset("assets/logo/jhony rocket.png"),
       tags: const ["burger", "FastFood"],
       deliveryTime: 15,
       deliveryFee: 0.5,
       distance: 10,
       menuItems: MenuItem.menuItems
-          .where((menuitem) => menuitem.restaurantId == 2)
+          .where((menuItem) => menuItem.restaurantId == 2)
           .toList(),
+      imageUrl:
+          'https://images.squarespace-cdn.com/content/v1/53cc1616e4b0f4361f8ace24/5a55aef9-39b6-4b51-ac43-af5da32d8747/Johnny+Rockets-dining+room-1-3.jpg',
     ),
     Restaurant(
       id: 3,
@@ -60,8 +67,10 @@ class Restaurant extends Equatable {
       deliveryFee: 1.5,
       distance: 19,
       menuItems: MenuItem.menuItems
-          .where((menuitem) => menuitem.restaurantId == 3)
+          .where((menuItem) => menuItem.restaurantId == 3)
           .toList(),
+      imageUrl:
+          'https://media-cdn.tripadvisor.com/media/photo-s/1a/9f/86/0f/caption.jpg',
     ),
     Restaurant(
       id: 4,
@@ -74,6 +83,8 @@ class Restaurant extends Equatable {
       menuItems: MenuItem.menuItems
           .where((menuItem) => menuItem.restaurantId == 4)
           .toList(),
+      imageUrl:
+          'https://www.mashed.com/img/gallery/the-untold-truth-of-dennys/intro-1537362655.jpg',
     ),
   ];
 }
