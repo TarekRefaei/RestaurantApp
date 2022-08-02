@@ -14,7 +14,7 @@ class Category extends Equatable {
   static List<Category> categories = [
     Category(
       id: 1,
-      name: "Fast Food",
+      name: "Sandwich",
       image: Image.asset("assets/logo/burger.png"),
     ),
     Category(

@@ -46,9 +46,9 @@ class HomeScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  itemCount: 3,
+                  itemCount: Promo.proms.length,
                   itemBuilder: (context, index) {
-                    return const PromoBox();
+                    return PromoBox(promo: Promo.proms[index]);
                   },
                 ),
               ),
@@ -75,7 +75,9 @@ class HomeScreen extends StatelessWidget {
                     width: 50,
                     height: 50,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/filter');
+                      },
                       icon: Icon(
                         Icons.menu,
                         color: Theme.of(context).primaryColor,

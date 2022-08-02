@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../config/const.dart';
+import '../models/models.dart';
 
 class PromoBox extends StatelessWidget {
-  const PromoBox({Key? key}) : super(key: key);
+  final Promo promo;
+
+  const PromoBox({Key? key, required this.promo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +14,8 @@ class PromoBox extends StatelessWidget {
           margin: const EdgeInsets.only(left: 8),
           width: MediaQuery.of(context).size.width - 40,
           decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: NetworkImage(promoUrl),
+              image: DecorationImage(
+                image: NetworkImage(promo.imageUrl),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(5.0),
@@ -34,14 +35,14 @@ class PromoBox extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    promoText,
+                    promo.title,
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   const SizedBox(
                     height: 5.0,
                   ),
                   Text(
-                    promoDescription,
+                    promo.description,
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ],

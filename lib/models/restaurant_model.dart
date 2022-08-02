@@ -34,7 +34,11 @@ class Restaurant extends Equatable {
       id: 1,
       name: "PAPAJones",
       restaurantImage: Image.asset("assets/logo/papajohnes.png"),
-      tags: const ["Pizza", "Pasta"],
+      tags: MenuItem.menuItems
+          .where((menuItem) => menuItem.restaurantId == 1)
+          .map((menuItem) => menuItem.category)
+          .toSet()
+          .toList(),
       deliveryTime: 10,
       deliveryFee: 0.2,
       distance: 30,
@@ -46,9 +50,13 @@ class Restaurant extends Equatable {
     ),
     Restaurant(
       id: 2,
-      name: "Jhony Rocket",
+      name: "Johnny Rocket",
       restaurantImage: Image.asset("assets/logo/jhony rocket.png"),
-      tags: const ["burger", "FastFood"],
+      tags: MenuItem.menuItems
+          .where((menuItem) => menuItem.restaurantId == 2)
+          .map((menuItem) => menuItem.category)
+          .toSet()
+          .toList(),
       deliveryTime: 15,
       deliveryFee: 0.5,
       distance: 10,
@@ -60,9 +68,13 @@ class Restaurant extends Equatable {
     ),
     Restaurant(
       id: 3,
-      name: "StarBucks",
+      name: "Star Bucks",
       restaurantImage: Image.asset("assets/logo/starbucks.png"),
-      tags: const ["cola", "Drinks"],
+      tags: MenuItem.menuItems
+          .where((menuItem) => menuItem.restaurantId == 3)
+          .map((menuItem) => menuItem.category)
+          .toSet()
+          .toList(),
       deliveryTime: 50,
       deliveryFee: 1.5,
       distance: 19,
@@ -76,7 +88,11 @@ class Restaurant extends Equatable {
       id: 4,
       name: "Denny",
       restaurantImage: Image.asset("assets/logo/denny.png"),
-      tags: const ["Pizza", "Drinks", "Fast Food", "Ice Cream", "Deserts"],
+      tags: MenuItem.menuItems
+          .where((menuItem) => menuItem.restaurantId == 4)
+          .map((menuItem) => menuItem.category)
+          .toSet()
+          .toList(),
       deliveryTime: 30,
       deliveryFee: 0.4,
       distance: 14,
