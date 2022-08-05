@@ -6,3 +6,5 @@ export 'promoBox.dart';
 export 'restaurantCard.dart';
 export 'restaurant_info.dart';
 export 'restaurantTags.dart';
+export 'customCategoryFilter.dart';
+export 'customPriceFilter.dart';
