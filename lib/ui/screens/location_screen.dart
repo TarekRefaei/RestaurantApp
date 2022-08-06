@@ -1,10 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_delivery_app/widgets/search_box.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../blocs/geolocation/geolocation_bloc.dart';
-import '../../widgets/g_map.dart';
 
 class LocationScreen extends StatelessWidget {
   const LocationScreen({Key? key}) : super(key: key);
@@ -26,7 +21,7 @@ class LocationScreen extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
-            child: GoogleMap(
+            child: const GoogleMap(
               initialCameraPosition: CameraPosition(
                 target: LatLng(10, 10),
                 zoom: 5,

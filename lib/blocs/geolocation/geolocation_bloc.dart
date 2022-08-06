@@ -16,23 +16,19 @@ class GeolocationBloc extends Bloc<GeolocationEvent, GeolocationState> {
   GeolocationBloc({required GeolocationRepo geolocationRepo})
       : _geolocationRepo = geolocationRepo,
         super(GeolocationLoading()) {
-    Stream<GeolocationState> mapEventToState(GeolocationEvent event) async* {
-      if (event is LoadGeolocation) {
-        yield* _mapLoadGeoToState();
-      } else if (event is UpdateGeolocation) {
-        yield* _mapUpdateGeoToState(event);
-      }
-    }
+    on<LoadGeolocation>(_mapLoadGeoToState);
+    on<UpdateGeolocation>(_mapUpdateGeoToState);
   }
 
-  Stream<GeolocationState> _mapLoadGeoToState() async* {
+  FutureOr<void> _mapLoadGeoToState(
+      LoadGeolocation event, Emitter<GeolocationState> emit) async* {
     _geolocationStream?.cancel();
     final Position position = await _geolocationRepo.getCurrentLocation();
     add(UpdateGeolocation(position: position));
   }
 
-  Stream<GeolocationState> _mapUpdateGeoToState(
-      UpdateGeolocation event) async* {
+  FutureOr<void> _mapUpdateGeoToState(
+      UpdateGeolocation event, Emitter<GeolocationState> emit) async* {
     yield GeolocationLoaded(position: event.position);
   }
 

@@ -18,9 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<GeolocationRepo>(
-          create: (_) => GeolocationRepo(),
-        )
+        RepositoryProvider(create: (context) => GeolocationRepo())
+        // RepositoryProvider<GeolocationRepo>(
+        //   create: () => GeolocationRepo(),
+        // )
       ],
       child: MultiBlocProvider(
         providers: [
