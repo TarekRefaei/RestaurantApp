@@ -11,8 +11,9 @@ class VoucherScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-        builder: (context) => const VoucherScreen(),
-        settings: const RouteSettings(name: routeName));
+      builder: (context) => const VoucherScreen(),
+      settings: const RouteSettings(name: routeName),
+    );
   }
 
   @override

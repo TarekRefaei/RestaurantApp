@@ -28,14 +28,6 @@ class BasketScreen extends StatelessWidget {
               ?.copyWith(color: Colors.white),
         ),
         centerTitle: true,
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {
-        //       Navigator.pushNamed(context, '/edit_basket');
-        //     },
-        //     icon: const Icon(Icons.edit),
-        //   ),
-        // ],
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
