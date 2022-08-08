@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../blocs/basket/basket_bloc.dart';
 
 class BasketScreen extends StatelessWidget {
@@ -10,8 +9,9 @@ class BasketScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-        builder: (context) => const BasketScreen(),
-        settings: const RouteSettings(name: routeName));
+      builder: (context) => const BasketScreen(),
+      settings: const RouteSettings(name: routeName),
+    );
   }
 
   @override
@@ -20,16 +20,22 @@ class BasketScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text("basket"),
+        title: Text(
+          "Basket",
+          style: Theme.of(context)
+              .textTheme
+              .headline4
+              ?.copyWith(color: Colors.white),
+        ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/edit_basket');
-            },
-            icon: const Icon(Icons.edit),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       Navigator.pushNamed(context, '/edit_basket');
+        //     },
+        //     icon: const Icon(Icons.edit),
+        //   ),
+        // ],
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
@@ -170,6 +176,8 @@ class BasketScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "${state.basket.itemQuantity(state.basket.items).entries.elementAt(index).value}× ",
@@ -193,6 +201,51 @@ class BasketScreen extends StatelessWidget {
                                                 color: Theme.of(context)
                                                     .primaryColor),
                                       ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            context.read<BasketBloc>().add(
+                                                RemoveAllItem(
+                                                    item: state.basket
+                                                        .itemQuantity(
+                                                            state.basket.items)
+                                                        .keys
+                                                        .elementAt(index)));
+                                          },
+                                          icon: const Icon(Icons.delete),
+                                          visualDensity: VisualDensity.compact,
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            context.read<BasketBloc>().add(
+                                                RemoveItem(
+                                                    item: state.basket
+                                                        .itemQuantity(
+                                                            state.basket.items)
+                                                        .keys
+                                                        .elementAt(index)));
+                                          },
+                                          icon: const Icon(Icons.remove_circle),
+                                          visualDensity: VisualDensity.compact,
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            context.read<BasketBloc>().add(
+                                                AddItem(
+                                                    item: state.basket
+                                                        .itemQuantity(
+                                                            state.basket.items)
+                                                        .keys
+                                                        .elementAt(index)));
+                                          },
+                                          icon: const Icon(Icons.add_circle),
+                                          visualDensity: VisualDensity.compact,
+                                        ),
+                                      ],
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                     ),
                                     Text(
                                       "\$${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).price}",
@@ -275,31 +328,57 @@ class BasketScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Do you Have a voucher?",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              ?.copyWith(color: Theme.of(context).primaryColor),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Apply",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                ?.copyWith(
-                                    color: Theme.of(context).primaryColor),
-                          ),
-                        ),
-                      ],
+                    BlocBuilder<BasketBloc, BasketState>(
+                      builder: (context, state) {
+                        if (state is BasketLoaded) {
+                          return state.basket.voucher == null
+                              ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Do you Have a voucher?",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline6
+                                          ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, '/voucher');
+                                      },
+                                      child: Text(
+                                        "Apply",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6
+                                            ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Text(
+                                  'Your Voucher is Added !',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                );
+                        } else {
+                          return const Center(
+                            child: Text("Something Went Wrong"),
+                          );
+                        }
+                      },
                     ),
                     Image.asset('assets/logo/voucher.jpg'),
                   ],

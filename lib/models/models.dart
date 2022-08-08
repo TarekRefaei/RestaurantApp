@@ -7,3 +7,4 @@ export 'category_filter_model.dart';
 export 'price_model.dart';
 export 'filter_model.dart';
 export 'basket.dart';
+export 'voucher_model.dart';

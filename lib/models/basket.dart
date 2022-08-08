@@ -4,19 +4,23 @@ import 'package:food_delivery_app/models/models.dart';
 class Basket extends Equatable {
   final List<MenuItem> items;
   final bool cutlery;
+  final Voucher? voucher;
 
   const Basket({
     this.items = const <MenuItem>[],
     this.cutlery = false,
+    this.voucher,
   });
 
   Basket copyWith({
     List<MenuItem>? items,
     bool? cutlery,
+    Voucher? voucher,
   }) {
     return Basket(
       items: items ?? this.items,
       cutlery: cutlery ?? this.cutlery,
+      voucher: voucher ?? this.voucher,
     );
   }
 
@@ -36,7 +40,7 @@ class Basket extends Equatable {
       items.fold(0, (total, current) => total + current.price);
 
   double total(subtotal) {
-    return subtotal + 50;
+    return (voucher == null) ? subtotal + 50 : subtotal + 50 - voucher?.value;
   }
 
   String get subtotalString => subtotal.toStringAsFixed(2);
@@ -44,5 +48,5 @@ class Basket extends Equatable {
   String get totalString => total(subtotal).toStringAsFixed(2);
 
   @override
-  List<Object?> get props => [items, cutlery];
+  List<Object?> get props => [items, cutlery, voucher];
 }

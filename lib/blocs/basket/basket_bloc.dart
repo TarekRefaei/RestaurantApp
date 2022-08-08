@@ -16,6 +16,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     on<RemoveItem>(_removeItem);
     on<RemoveAllItem>(_removeAllItem);
     on<ToggleSwitch>(_toggleSwitch);
+    on<AddVoucher>(_addVoucher);
   }
 
   FutureOr<void> _startBasket(
@@ -84,6 +85,19 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
               items: List.from(state.basket.items)
                 ..removeWhere((item) => item == event.item),
             ),
+          ),
+        );
+      } catch (_) {}
+    }
+  }
+
+  FutureOr<void> _addVoucher(AddVoucher event, Emitter<BasketState> emit) {
+    final state = this.state;
+    if (state is BasketLoaded) {
+      try {
+        emit(
+          BasketLoaded(
+            basket: state.basket.copyWith(voucher: event.voucher),
           ),
         );
       } catch (_) {}
