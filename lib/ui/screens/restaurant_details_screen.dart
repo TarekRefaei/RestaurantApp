@@ -37,7 +37,9 @@ class RestaurantDetailsScreen extends StatelessWidget {
                 shape: const RoundedRectangleBorder(),
                 padding: const EdgeInsets.symmetric(horizontal: 50),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/basket');
+              },
               child: const Text('Basket'),
             ),
           ],
@@ -67,74 +69,12 @@ class RestaurantDetailsScreen extends StatelessWidget {
               shrinkWrap: true,
               itemCount: restaurant.tags.length,
               itemBuilder: (context, index) {
-                return _buildMenuItem(restaurant, context, index);
+                return buildMenuItem(restaurant, context, index);
               },
             )
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildMenuItem(
-      Restaurant restaurant, BuildContext context, int index) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            restaurant.tags[index],
-            style: Theme.of(context)
-                .textTheme
-                .headline3!
-                .copyWith(color: Theme.of(context).primaryColor),
-          ),
-        ),
-        Column(
-          children: restaurant.menuItems
-              .where((menuItem) => menuItem.category == restaurant.tags[index])
-              .map(
-                (menuItem) => Column(
-                  children: [
-                    Container(
-                      color: Colors.white,
-                      child: ListTile(
-                        dense: true,
-                        title: Text(
-                          menuItem.name,
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        subtitle: Text(
-                          menuItem.description,
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        trailing: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              '\$${menuItem.price}',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.add_circle,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const Divider(height: 4)
-                  ],
-                ),
-              )
-              .toList(),
-        ),
-      ],
     );
   }
 }

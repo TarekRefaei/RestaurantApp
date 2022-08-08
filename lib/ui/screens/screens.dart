@@ -8,3 +8,4 @@ export 'restaurant_list_screen.dart';
 export 'voucher_screen.dart';
 export 'filter_screen.dart';
 export 'splash_screen.dart';
+export 'edit_basket_screen.dart';

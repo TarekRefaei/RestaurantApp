@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_app/blocs/basket/basket_bloc.dart';
 import 'package:food_delivery_app/blocs/filters/filters_bloc.dart';
 import 'package:food_delivery_app/blocs/geolocation/geolocation_bloc.dart';
 import 'package:food_delivery_app/config/app_router.dart';
@@ -37,7 +38,13 @@ class MyApp extends StatelessWidget {
               ..add(
                 LoadFilter(),
               ),
-          )
+          ),
+          BlocProvider(
+            create: (context) => BasketBloc()
+              ..add(
+                StartBasket(),
+              ),
+          ),
         ],
         child: MaterialApp(
           title: 'Flutter Demo',

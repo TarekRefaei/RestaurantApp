@@ -30,7 +30,9 @@ class RestaurantListScreen extends StatelessWidget {
         child: ListView.builder(
           itemCount: restaurant.length,
           itemBuilder: (context, index) {
-            return RestaurantCard(restaurant: restaurant[index]);
+            return RestaurantCard(
+              restaurant: restaurant[index],
+            );
           },
         ),
       ),

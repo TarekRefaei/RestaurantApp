@@ -67,7 +67,6 @@ class FilterScreen extends StatelessWidget {
                             ),
                           )
                           .toList();
-
                       Navigator.pushNamed(context, '/restaurant List',
                           arguments: restaurants);
                     },
