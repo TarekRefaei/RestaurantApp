@@ -54,10 +54,18 @@ class DeliveryTimeScreen extends StatelessWidget {
                   ?.copyWith(color: Theme.of(context).primaryColor),
             ),
             Container(
+              margin: const EdgeInsets.only(top: 10, bottom: 10),
               child: Row(
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Delivery is Today"),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    },
                     child: Text(
                       "Today",
                       style: Theme.of(context)
@@ -66,9 +74,16 @@ class DeliveryTimeScreen extends StatelessWidget {
                           ?.copyWith(color: Colors.white),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Delivery is Tomorrow"),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    },
                     child: Text(
                       "Tomorrow",
                       style: Theme.of(context)
@@ -79,7 +94,14 @@ class DeliveryTimeScreen extends StatelessWidget {
                   )
                 ],
               ),
-            )
+            ),
+            Text(
+              "Choose the Time :",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4
+                  ?.copyWith(color: Theme.of(context).primaryColor),
+            ),
           ],
         ),
       ),
