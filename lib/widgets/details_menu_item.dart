@@ -51,6 +51,12 @@ Widget buildMenuItem(Restaurant restaurant, BuildContext context, int index) {
                                   context.read<BasketBloc>().add(
                                         AddItem(item: menuItem),
                                       );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("one Item added to basket"),
+                                      duration: Duration(seconds: 1),
+                                    ),
+                                  );
                                 },
                                 icon: Icon(
                                   Icons.add_circle,

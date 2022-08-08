@@ -205,6 +205,15 @@ class BasketScreen extends StatelessWidget {
                                                             state.basket.items)
                                                         .keys
                                                         .elementAt(index)));
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                    " All ${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).name} items has been Removed"),
+                                                duration:
+                                                    const Duration(seconds: 1),
+                                              ),
+                                            );
                                           },
                                           icon: const Icon(Icons.delete),
                                           visualDensity: VisualDensity.compact,
@@ -212,12 +221,23 @@ class BasketScreen extends StatelessWidget {
                                         IconButton(
                                           onPressed: () {
                                             context.read<BasketBloc>().add(
-                                                RemoveItem(
+                                                  RemoveItem(
                                                     item: state.basket
                                                         .itemQuantity(
                                                             state.basket.items)
                                                         .keys
-                                                        .elementAt(index)));
+                                                        .elementAt(index),
+                                                  ),
+                                                );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                    " One ${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).name} Removed"),
+                                                duration:
+                                                    const Duration(seconds: 1),
+                                              ),
+                                            );
                                           },
                                           icon: const Icon(Icons.remove_circle),
                                           visualDensity: VisualDensity.compact,
@@ -231,6 +251,15 @@ class BasketScreen extends StatelessWidget {
                                                             state.basket.items)
                                                         .keys
                                                         .elementAt(index)));
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                    " One ${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).name} Added"),
+                                                duration:
+                                                    const Duration(seconds: 1),
+                                              ),
+                                            );
                                           },
                                           icon: const Icon(Icons.add_circle),
                                           visualDensity: VisualDensity.compact,
@@ -290,7 +319,9 @@ class BasketScreen extends StatelessWidget {
                               ?.copyWith(color: Theme.of(context).primaryColor),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/deliveryTime');
+                          },
                           child: Text(
                             "Change",
                             style: Theme.of(context)
