@@ -5,22 +5,26 @@ class Basket extends Equatable {
   final List<MenuItem> items;
   final bool cutlery;
   final Voucher? voucher;
+  final DeliveryTime? deliveryTime;
 
   const Basket({
     this.items = const <MenuItem>[],
     this.cutlery = false,
     this.voucher,
+    this.deliveryTime,
   });
 
   Basket copyWith({
     List<MenuItem>? items,
     bool? cutlery,
     Voucher? voucher,
+    DeliveryTime? deliveryTime,
   }) {
     return Basket(
       items: items ?? this.items,
       cutlery: cutlery ?? this.cutlery,
       voucher: voucher ?? this.voucher,
+      deliveryTime: deliveryTime ?? this.deliveryTime,
     );
   }
 
@@ -48,5 +52,5 @@ class Basket extends Equatable {
   String get totalString => total(subtotal).toStringAsFixed(2);
 
   @override
-  List<Object?> get props => [items, cutlery, voucher];
+  List<Object?> get props => [items, cutlery, voucher, deliveryTime];
 }

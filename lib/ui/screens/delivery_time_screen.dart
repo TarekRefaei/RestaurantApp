@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_app/models/delivery_model.dart';
+
+import '../../blocs/basket/basket_bloc.dart';
 
 class DeliveryTimeScreen extends StatelessWidget {
   const DeliveryTimeScreen({Key? key}) : super(key: key);
@@ -7,8 +11,9 @@ class DeliveryTimeScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-        builder: (context) => const DeliveryTimeScreen(),
-        settings: const RouteSettings(name: routeName));
+      builder: (context) => const DeliveryTimeScreen(),
+      settings: const RouteSettings(name: routeName),
+    );
   }
 
   @override
@@ -36,7 +41,9 @@ class DeliveryTimeScreen extends StatelessWidget {
                 shape: const RoundedRectangleBorder(),
                 padding: const EdgeInsets.symmetric(horizontal: 50),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: const Text('Confirm'),
             ),
           ],
@@ -101,6 +108,44 @@ class DeliveryTimeScreen extends StatelessWidget {
                   .textTheme
                   .headline4
                   ?.copyWith(color: Theme.of(context).primaryColor),
+            ),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(top: 10, bottom: 10),
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 2.3,
+                  ),
+                  itemCount: DeliveryTime.deliveryTimes.length,
+                  itemBuilder: (context, index) {
+                    return BlocBuilder<BasketBloc, BasketState>(
+                      builder: (context, state) {
+                        return Card(
+                          child: TextButton(
+                            onPressed: () {
+                              context.read<BasketBloc>().add(
+                                    AddDeliveryTime(
+                                      DeliveryTime.deliveryTimes[index],
+                                    ),
+                                  );
+                            },
+                            child: Text(
+                              DeliveryTime.deliveryTimes[index].value,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5
+                                  ?.copyWith(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),

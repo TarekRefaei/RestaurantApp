@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import '../../models/models.dart';
 
 part 'basket_event.dart';
@@ -17,6 +15,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     on<RemoveAllItem>(_removeAllItem);
     on<ToggleSwitch>(_toggleSwitch);
     on<AddVoucher>(_addVoucher);
+    on<AddDeliveryTime>(_addDeliveryTime);
   }
 
   FutureOr<void> _startBasket(
@@ -98,6 +97,20 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
         emit(
           BasketLoaded(
             basket: state.basket.copyWith(voucher: event.voucher),
+          ),
+        );
+      } catch (_) {}
+    }
+  }
+
+  FutureOr<void> _addDeliveryTime(
+      AddDeliveryTime event, Emitter<BasketState> emit) {
+    final state = this.state;
+    if (state is BasketLoaded) {
+      try {
+        emit(
+          BasketLoaded(
+            basket: state.basket.copyWith(deliveryTime: event.deliveryTime),
           ),
         );
       } catch (_) {}

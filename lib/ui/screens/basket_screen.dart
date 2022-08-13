@@ -305,33 +305,85 @@ class BasketScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset('assets/logo/deliverylogo.png'),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Delivery in 20 Minutes",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              ?.copyWith(color: Theme.of(context).primaryColor),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/deliveryTime');
-                          },
-                          child: Text(
-                            "Change",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                ?.copyWith(
-                                    color: Theme.of(context).primaryColor),
-                          ),
-                        ),
-                      ],
+                    BlocBuilder<BasketBloc, BasketState>(
+                      builder: (context, state) {
+                        if (state is BasketLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (state is BasketLoaded) {
+                          return state.basket.deliveryTime == null
+                              ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Select Delivery Time >>",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline6
+                                          ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, '/deliveryTime');
+                                      },
+                                      child: Text(
+                                        "Change",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6
+                                            ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Delivery at ${state.basket.deliveryTime?.value}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline6
+                                          ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, '/deliveryTime');
+                                      },
+                                      child: Text(
+                                        "Change",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6
+                                            ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                        } else {
+                          return const Center(
+                            child: Text("Something Went Wrong"),
+                          );
+                        }
+                      },
                     )
                   ],
                 ),
