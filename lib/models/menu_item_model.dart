@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class MenuItem extends Equatable {
+class MenuElement extends Equatable {
   final int id;
   final int restaurantId;
   final String name;
@@ -8,7 +8,7 @@ class MenuItem extends Equatable {
   final String description;
   final double price;
 
-  const MenuItem(
+  const MenuElement(
       {required this.id,
       required this.category,
       required this.restaurantId,
@@ -20,8 +20,8 @@ class MenuItem extends Equatable {
   List<Object?> get props =>
       [id, name, restaurantId, description, price, category];
 
-  static List<MenuItem> menuItems = [
-    const MenuItem(
+  static List<MenuElement> menuElements = [
+    const MenuElement(
       id: 1,
       restaurantId: 1,
       name: "Margherita",
@@ -29,7 +29,7 @@ class MenuItem extends Equatable {
       price: 6.99,
       category: 'Pizza',
     ),
-    const MenuItem(
+    const MenuElement(
       id: 2,
       restaurantId: 1,
       name: "4 Forming",
@@ -37,7 +37,7 @@ class MenuItem extends Equatable {
       price: 4.99,
       category: 'Pizza',
     ),
-    const MenuItem(
+    const MenuElement(
       id: 3,
       restaurantId: 1,
       name: "Bavarian",
@@ -45,7 +45,7 @@ class MenuItem extends Equatable {
       price: 3.99,
       category: 'Pizza',
     ),
-    const MenuItem(
+    const MenuElement(
       id: 4,
       restaurantId: 1,
       name: "patron",
@@ -53,7 +53,7 @@ class MenuItem extends Equatable {
       price: 1.99,
       category: 'Pizza',
     ),
-    const MenuItem(
+    const MenuElement(
       id: 5,
       restaurantId: 1,
       name: "Coca Cola",
@@ -61,7 +61,7 @@ class MenuItem extends Equatable {
       price: 1.99,
       category: 'Cold Drink',
     ),
-    const MenuItem(
+    const MenuElement(
       id: 6,
       restaurantId: 2,
       name: "IceCream",
@@ -69,7 +69,7 @@ class MenuItem extends Equatable {
       price: 6.99,
       category: 'Ice Cream',
     ),
-    const MenuItem(
+    const MenuElement(
       id: 7,
       restaurantId: 2,
       name: "Fried Chicken",
@@ -77,7 +77,7 @@ class MenuItem extends Equatable {
       price: 10.99,
       category: 'Fried Chicken',
     ),
-    const MenuItem(
+    const MenuElement(
       id: 8,
       restaurantId: 3,
       name: "Hot Drink",
@@ -85,7 +85,7 @@ class MenuItem extends Equatable {
       price: 10.99,
       category: 'Hot Drink',
     ),
-    const MenuItem(
+    const MenuElement(
       id: 9,
       restaurantId: 4,
       name: "Burger Sandwich",

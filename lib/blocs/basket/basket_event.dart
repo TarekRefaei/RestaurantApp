@@ -12,31 +12,31 @@ class StartBasket extends BasketEvent {
   List<Object> get props => [];
 }
 
-class AddItem extends BasketEvent {
-  final MenuItem item;
+class AddElement extends BasketEvent {
+  final MenuElement element;
 
-  const AddItem({required this.item});
+  const AddElement({required this.element});
 
   @override
-  List<Object> get props => [item];
+  List<Object> get props => [element];
 }
 
-class RemoveItem extends BasketEvent {
-  final MenuItem item;
+class RemoveElement extends BasketEvent {
+  final MenuElement element;
 
-  const RemoveItem({required this.item});
+  const RemoveElement({required this.element});
 
   @override
-  List<Object> get props => [item];
+  List<Object> get props => [element];
 }
 
-class RemoveAllItem extends BasketEvent {
-  final MenuItem item;
+class RemoveAllElement extends BasketEvent {
+  final MenuElement element;
 
-  const RemoveAllItem({required this.item});
+  const RemoveAllElement({required this.element});
 
   @override
-  List<Object> get props => [item];
+  List<Object> get props => [element];
 }
 
 class ToggleSwitch extends BasketEvent {

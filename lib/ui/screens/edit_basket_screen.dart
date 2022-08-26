@@ -61,7 +61,7 @@ class EditBasketScreen extends StatelessWidget {
                     );
                   }
                   if (state is BasketLoaded) {
-                    return state.basket.items.isEmpty
+                    return state.basket.element.isEmpty
                         ? Container(
                             width: double.infinity,
                             margin: const EdgeInsets.only(top: 5),
@@ -89,7 +89,7 @@ class EditBasketScreen extends StatelessWidget {
                           )
                         : ListView.builder(
                             itemCount: state.basket
-                                .itemQuantity(state.basket.items)
+                                .itemQuantity(state.basket.element)
                                 .keys
                                 .length,
                             shrinkWrap: true,
@@ -108,7 +108,7 @@ class EditBasketScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "${state.basket.itemQuantity(state.basket.items).entries.elementAt(index).value}× ",
+                                      "${state.basket.itemQuantity(state.basket.element).entries.elementAt(index).value}× ",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
@@ -121,7 +121,7 @@ class EditBasketScreen extends StatelessWidget {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        "${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).name}",
+                                        "${state.basket.itemQuantity(state.basket.element).keys.elementAt(index).name}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline6
@@ -133,10 +133,10 @@ class EditBasketScreen extends StatelessWidget {
                                     IconButton(
                                       onPressed: () {
                                         context.read<BasketBloc>().add(
-                                            RemoveAllItem(
-                                                item: state.basket
+                                            RemoveAllElement(
+                                                element: state.basket
                                                     .itemQuantity(
-                                                        state.basket.items)
+                                                        state.basket.element)
                                                     .keys
                                                     .elementAt(index)));
                                       },
@@ -146,10 +146,10 @@ class EditBasketScreen extends StatelessWidget {
                                     IconButton(
                                       onPressed: () {
                                         context.read<BasketBloc>().add(
-                                            RemoveItem(
-                                                item: state.basket
+                                            RemoveElement(
+                                                element: state.basket
                                                     .itemQuantity(
-                                                        state.basket.items)
+                                                        state.basket.element)
                                                     .keys
                                                     .elementAt(index)));
                                       },
@@ -158,10 +158,10 @@ class EditBasketScreen extends StatelessWidget {
                                     ),
                                     IconButton(
                                       onPressed: () {
-                                        context.read<BasketBloc>().add(AddItem(
-                                            item: state.basket
+                                        context.read<BasketBloc>().add(AddElement(
+                                            element: state.basket
                                                 .itemQuantity(
-                                                    state.basket.items)
+                                                    state.basket.element)
                                                 .keys
                                                 .elementAt(index)));
                                       },

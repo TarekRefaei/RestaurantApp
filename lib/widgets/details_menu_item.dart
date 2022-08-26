@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../blocs/basket/basket_bloc.dart';
 import '../models/models.dart';
 
-Widget buildMenuItem(Restaurant restaurant, BuildContext context, int index) {
+Widget buildMenuElement(Restaurant restaurant, BuildContext context, int index) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -19,21 +18,21 @@ Widget buildMenuItem(Restaurant restaurant, BuildContext context, int index) {
         ),
       ),
       Column(
-        children: restaurant.menuItems
-            .where((menuItem) => menuItem.category == restaurant.tags[index])
+        children: restaurant.menuElements
+            .where((menuElement) => menuElement.category == restaurant.tags[index])
             .map(
-              (menuItem) => Column(
+              (menuElement) => Column(
                 children: [
                   Container(
                     color: Colors.white,
                     child: ListTile(
                       dense: true,
                       title: Text(
-                        menuItem.name,
+                        menuElement.name,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       subtitle: Text(
-                        menuItem.description,
+                        menuElement.description,
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       trailing: Row(
@@ -41,7 +40,7 @@ Widget buildMenuItem(Restaurant restaurant, BuildContext context, int index) {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            '\$${menuItem.price}',
+                            '\$${menuElement.price}',
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                           BlocBuilder<BasketBloc, BasketState>(
@@ -49,11 +48,11 @@ Widget buildMenuItem(Restaurant restaurant, BuildContext context, int index) {
                               return IconButton(
                                 onPressed: () {
                                   context.read<BasketBloc>().add(
-                                        AddItem(item: menuItem),
+                                        AddElement(element: menuElement),
                                       );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                      content: Text("one Item added to basket"),
+                                      content: Text("one Element added to basket"),
                                       duration: Duration(seconds: 1),
                                     ),
                                   );

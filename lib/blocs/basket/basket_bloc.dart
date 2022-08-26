@@ -10,9 +10,9 @@ part 'basket_state.dart';
 class BasketBloc extends Bloc<BasketEvent, BasketState> {
   BasketBloc() : super(BasketLoading()) {
     on<StartBasket>(_startBasket);
-    on<AddItem>(_addItem);
-    on<RemoveItem>(_removeItem);
-    on<RemoveAllItem>(_removeAllItem);
+    on<AddElement>(_addItem);
+    on<RemoveElement>(_removeItem);
+    on<RemoveAllElement>(_removeAllItem);
     on<ToggleSwitch>(_toggleSwitch);
     on<AddVoucher>(_addVoucher);
     on<AddDeliveryTime>(_addDeliveryTime);
@@ -28,14 +28,14 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     emit(const BasketLoaded(basket: Basket()));
   }
 
-  FutureOr<void> _addItem(AddItem event, Emitter<BasketState> emit) {
+  FutureOr<void> _addItem(AddElement event, Emitter<BasketState> emit) {
     final state = this.state;
     if (state is BasketLoaded) {
       try {
         emit(
           BasketLoaded(
             basket: state.basket.copyWith(
-              items: List.from(state.basket.items)..add(event.item),
+              element: List.from(state.basket.element)..add(event.element),
             ),
           ),
         );
@@ -43,14 +43,14 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     }
   }
 
-  FutureOr<void> _removeItem(RemoveItem event, Emitter<BasketState> emit) {
+  FutureOr<void> _removeItem(RemoveElement event, Emitter<BasketState> emit) {
     final state = this.state;
     if (state is BasketLoaded) {
       try {
         emit(
           BasketLoaded(
             basket: state.basket.copyWith(
-              items: List.from(state.basket.items)..remove(event.item),
+              element: List.from(state.basket.element)..remove(event.element),
             ),
           ),
         );
@@ -74,15 +74,15 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   }
 
   FutureOr<void> _removeAllItem(
-      RemoveAllItem event, Emitter<BasketState> emit) {
+      RemoveAllElement event, Emitter<BasketState> emit) {
     final state = this.state;
     if (state is BasketLoaded) {
       try {
         emit(
           BasketLoaded(
             basket: state.basket.copyWith(
-              items: List.from(state.basket.items)
-                ..removeWhere((item) => item == event.item),
+              element: List.from(state.basket.element)
+                ..removeWhere((item) => item == event.element),
             ),
           ),
         );

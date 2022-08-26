@@ -69,7 +69,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
               shrinkWrap: true,
               itemCount: restaurant.tags.length,
               itemBuilder: (context, index) {
-                return buildMenuItem(restaurant, context, index);
+                return buildMenuElement(restaurant, context, index);
               },
             )
           ],

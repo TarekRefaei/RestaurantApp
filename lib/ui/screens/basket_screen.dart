@@ -109,7 +109,7 @@ class BasketScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                "Items",
+                "Elements",
                 style: Theme.of(context)
                     .textTheme
                     .headline4
@@ -123,7 +123,7 @@ class BasketScreen extends StatelessWidget {
                     );
                   }
                   if (state is BasketLoaded) {
-                    return state.basket.items.isEmpty
+                    return state.basket.element.isEmpty
                         ? Container(
                             width: double.infinity,
                             margin: const EdgeInsets.only(top: 5),
@@ -151,7 +151,7 @@ class BasketScreen extends StatelessWidget {
                           )
                         : ListView.builder(
                             itemCount: state.basket
-                                .itemQuantity(state.basket.items)
+                                .itemQuantity(state.basket.element)
                                 .keys
                                 .length,
                             shrinkWrap: true,
@@ -172,7 +172,7 @@ class BasketScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "${state.basket.itemQuantity(state.basket.items).entries.elementAt(index).value}× ",
+                                      "${state.basket.itemQuantity(state.basket.element).entries.elementAt(index).value}× ",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
@@ -185,7 +185,7 @@ class BasketScreen extends StatelessWidget {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        "${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).name}",
+                                        "${state.basket.itemQuantity(state.basket.element).keys.elementAt(index).name}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline6
@@ -199,17 +199,17 @@ class BasketScreen extends StatelessWidget {
                                         IconButton(
                                           onPressed: () {
                                             context.read<BasketBloc>().add(
-                                                RemoveAllItem(
-                                                    item: state.basket
-                                                        .itemQuantity(
-                                                            state.basket.items)
+                                                RemoveAllElement(
+                                                    element: state.basket
+                                                        .itemQuantity(state
+                                                            .basket.element)
                                                         .keys
                                                         .elementAt(index)));
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                    " All ${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).name} items has been Removed"),
+                                                    " All ${state.basket.itemQuantity(state.basket.element).keys.elementAt(index).name} element has been Removed"),
                                                 duration:
                                                     const Duration(seconds: 1),
                                               ),
@@ -221,10 +221,10 @@ class BasketScreen extends StatelessWidget {
                                         IconButton(
                                           onPressed: () {
                                             context.read<BasketBloc>().add(
-                                                  RemoveItem(
-                                                    item: state.basket
-                                                        .itemQuantity(
-                                                            state.basket.items)
+                                                  RemoveElement(
+                                                    element: state.basket
+                                                        .itemQuantity(state
+                                                            .basket.element)
                                                         .keys
                                                         .elementAt(index),
                                                   ),
@@ -233,7 +233,7 @@ class BasketScreen extends StatelessWidget {
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                    " One ${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).name} Removed"),
+                                                    " One ${state.basket.itemQuantity(state.basket.element).keys.elementAt(index).name} Removed"),
                                                 duration:
                                                     const Duration(seconds: 1),
                                               ),
@@ -245,17 +245,17 @@ class BasketScreen extends StatelessWidget {
                                         IconButton(
                                           onPressed: () {
                                             context.read<BasketBloc>().add(
-                                                AddItem(
-                                                    item: state.basket
-                                                        .itemQuantity(
-                                                            state.basket.items)
+                                                AddElement(
+                                                    element: state.basket
+                                                        .itemQuantity(state
+                                                            .basket.element)
                                                         .keys
                                                         .elementAt(index)));
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                    " One ${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).name} Added"),
+                                                    " One ${state.basket.itemQuantity(state.basket.element).keys.elementAt(index).name} Added"),
                                                 duration:
                                                     const Duration(seconds: 1),
                                               ),
@@ -269,7 +269,7 @@ class BasketScreen extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                     ),
                                     Text(
-                                      "\$${state.basket.itemQuantity(state.basket.items).keys.elementAt(index).price}",
+                                      "\$${state.basket.itemQuantity(state.basket.element).keys.elementAt(index).price}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
