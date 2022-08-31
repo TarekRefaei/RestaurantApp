@@ -2,20 +2,32 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../models/models.dart';
+import '../voucher/voucher_bloc.dart';
 
 part 'basket_event.dart';
 
 part 'basket_state.dart';
 
 class BasketBloc extends Bloc<BasketEvent, BasketState> {
-  BasketBloc() : super(BasketLoading()) {
+  final VoucherBloc _voucherBloc;
+  late StreamSubscription _voucherSubscription;
+
+  BasketBloc({required VoucherBloc voucherBloc})
+      : _voucherBloc = voucherBloc,
+        super(BasketLoading()) {
     on<StartBasket>(_startBasket);
     on<AddElement>(_addItem);
     on<RemoveElement>(_removeItem);
     on<RemoveAllElement>(_removeAllItem);
     on<ToggleSwitch>(_toggleSwitch);
-    on<AddVoucher>(_addVoucher);
+    on<ApplyVoucher>(_applyVoucher);
     on<AddDeliveryTime>(_addDeliveryTime);
+
+    _voucherSubscription = voucherBloc.stream.listen((state) {
+      if (state is VoucherSelect){
+        add(ApplyVoucher(voucher: state.voucher));
+      }
+    });
   }
 
   FutureOr<void> _startBasket(
@@ -90,7 +102,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     }
   }
 
-  FutureOr<void> _addVoucher(AddVoucher event, Emitter<BasketState> emit) {
+  FutureOr<void> _applyVoucher(ApplyVoucher event, Emitter<BasketState> emit) {
     final state = this.state;
     if (state is BasketLoaded) {
       try {

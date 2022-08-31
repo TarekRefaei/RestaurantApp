@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_delivery_app/models/models.dart';
-
-import '../../blocs/basket/basket_bloc.dart';
+import 'package:food_delivery_app/repos/all_repos.dart';
+import '../../blocs/voucher/voucher_bloc.dart';
 
 class VoucherScreen extends StatelessWidget {
   const VoucherScreen({Key? key}) : super(key: key);
@@ -71,8 +70,12 @@ class VoucherScreen extends StatelessWidget {
                   Expanded(
                     child: TextFormField(
                       decoration: const InputDecoration(
-                          hintText: "Voucher Code Here",
-                          contentPadding: EdgeInsets.all(8)),
+                        hintText: "Voucher Code Here",
+                        contentPadding: EdgeInsets.all(8),
+                      ),
+                      onChanged: (value) async {
+                        print(await VoucherRepo().searchVoucher(value));
+                      },
                     ),
                   ),
                 ],
@@ -88,63 +91,66 @@ class VoucherScreen extends StatelessWidget {
                     ?.copyWith(color: Theme.of(context).primaryColor),
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: Voucher.vouchers.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(top: 10, bottom: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '1X',
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                            color: Theme.of(context).colorScheme.secondary),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: Text(
-                          Voucher.vouchers[index].code,
-                          style: Theme.of(context).textTheme.headline6,
+            BlocBuilder<VoucherBloc, VoucherState>(
+              builder: (context, state) {
+                if (state is VoucherLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (state is VoucherLoaded) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.vouchers.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.only(top: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                      ),
-                      BlocBuilder<BasketBloc, BasketState>(
-                        builder: (context, state) {
-                          if (state is BasketLoading) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                          if (state is BasketLoaded) {
-                            return TextButton(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '1X',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: Text(
+                                state.vouchers[index].code,
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                            ),
+                            TextButton(
                               onPressed: () {
-                                context.read<BasketBloc>().add(
-                                      AddVoucher(
-                                        voucher: Voucher.vouchers[index],
+                                context.read<VoucherBloc>().add(
+                                      SelectVouchers(
+                                        voucher: state.vouchers[index],
                                       ),
                                     );
                                 Navigator.pop(context);
                               },
                               child: const Text('Apply'),
-                            );
-                          } else {
-                            return const Center(
-                              child: Text("Something Went Wrong"),
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                );
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return const Text("Something Went Wrong");
+                }
               },
             ),
           ],
