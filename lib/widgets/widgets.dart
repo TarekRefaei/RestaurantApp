@@ -9,3 +9,4 @@ export 'restaurantTags.dart';
 export 'customCategoryFilter.dart';
 export 'customPriceFilter.dart';
 export 'details_menu_item.dart';
+export 'address_box.dart';

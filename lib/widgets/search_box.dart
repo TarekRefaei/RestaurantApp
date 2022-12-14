@@ -19,6 +19,7 @@ class SearchBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: TextField(
+        textAlignVertical: TextAlignVertical.center,
         onChanged: (value) {},
         decoration: InputDecoration(
           filled: true,

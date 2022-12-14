@@ -23,6 +23,57 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Expanded(
+                child: SearchBox(
+                  hintText: "Search in Thousand of Product",
+                  borderColor: Colors.black,
+                  underLineColor: Colors.black,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 80,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: Address.address.length,
+                  itemBuilder: (context, index) {
+                    return AddressBox(
+                      addressName: Address.address[index].addressName,
+                      streetName: Address.address[index].streetName,
+                    );
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Explore by category',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/filter');
+                    },
+                    child: Text(
+                      'Detailed Filter',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          ?.copyWith(color: Colors.grey),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
@@ -36,6 +87,16 @@ class HomeScreen extends StatelessWidget {
                       category: Category.categories[index],
                     );
                   },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Deals of the Day',
+                  style: Theme.of(context).textTheme.headline4,
                 ),
               ),
             ),
@@ -55,44 +116,10 @@ class HomeScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: SearchBox(
-                      hintText: "What would you like to eat?",
-                      borderColor: Colors.black,
-                      underLineColor: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    width: 50,
-                    height: 50,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/filter');
-                      },
-                      icon: Icon(
-                        Icons.menu,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'Top Rated',
+                  'Top Rated Restaurants',
                   style: Theme.of(context).textTheme.headline4,
                 ),
               ),

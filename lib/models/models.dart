@@ -9,3 +9,4 @@ export 'filter_model.dart';
 export 'basket.dart';
 export 'voucher_model.dart';
 export 'delivery_model.dart';
+export 'address_model.dart';
